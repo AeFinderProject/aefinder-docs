@@ -11,12 +11,12 @@ const config: Config = {
   url: 'https://your-docusaurus-site.example.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/aefinder-docs/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'AeFinderProject', // Usually your GitHub org/user name.
-  projectName: 'aefinder-docs', // Usually your repo name.
+  // organizationName: 'AeFinderProject', // Usually your GitHub org/user name.
+  // projectName: 'aefinder-docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
