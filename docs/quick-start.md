@@ -153,18 +153,18 @@ To query data from your AeFinder App, you will use specific URLs provided on you
 ### Standard URLs for Querying Data
 
 - **GraphQL URL for TestNet Environment**:
-  - `https://test.aefinder.io/api/app/graphql/{AppID}`
-  - **Example**: `https://test.aefinder.io/api/app/graphql/hello_world` where `hello_world` is the AppID.
+  - `https://gcptest-indexer-api.aefinder.io/api/app/graphql/{AppID}`
+  - **Example**: `https://gcptest-indexer-api.aefinder.io/api/app/graphql/hello_world` where `hello_world` is the AppID.
 
 - **GraphQL URL for MainNet**:
-  - `https://www.aefinder.io/api/app/graphql/{AppID}`
+  - `https://indexer-api.aefinder.io/api/app/graphql/{AppID}`
 
 ### Requesting a Specific Version
 
 If your needs require data from a specific version of your AeFinder App, modify the URL by appending the version ID. Here's how you can structure this URL:
 
 - **URL for Specific Version on TestNet**:
-  - `https://test.aefinder.io/api/app/graphql/hello_world/6a7665d7cf1d42a6a1c2354959f6a83a`
+  - `https://gcptest-indexer-api.aefinder.io/api/app/graphql/hello_world/6a7665d7cf1d42a6a1c2354959f6a83a`
   - In this URL:
     - `hello_world` is the AppID.
     - `6a7665d7cf1d42a6a1c2354959f6a83a` represents a specific version of the App.
