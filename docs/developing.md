@@ -171,7 +171,7 @@ Next, we will analyze the various components of the processor and their detailed
 ```csharp
 public override string GetContractAddress(string chainId)
 {
-    return chaindId switch
+    return chainId switch
     {
         "AELF" => "MainChainContractAddress",
         "tDVV" => "SideChainContractAddress",
@@ -197,7 +197,7 @@ public override async Task ProcessAsync(MyLogEvent logEvent, LogEventContext con
 
 The `ProcessAsync` method is mainly used to write the processor processing logic, and the input parameters are log event data and event context.
 
-##### GetEntityAsync<MyEntity>(id)
+##### GetEntityAsync`<MyEntity>(id)`
 
 This asynchronous method is mainly used to query existing business data, and the input parameter is the ID of the saved business data.
 
