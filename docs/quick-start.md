@@ -32,7 +32,7 @@ sidebar_position: 1
 ### Install the Local Development Environment
 
 - **Environment Requirement**: Currently, AeFinder App only supports development using the C# language.
-- **Required Installation**: You will need to install the .NET 7.0 SDK locally. Visit the [official .NET download page](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) to get the SDK.
+- **Required Installation**: You will need to install the .NET 8.0 SDK locally. Visit the [official .NET download page](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) to get the SDK.
 
 ### Create and Download the AeFinder App Template
 
