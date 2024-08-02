@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Developing
 ## Creating an AeFinder App
 
