@@ -40,8 +40,9 @@ TokenContract.c.cs
 TokenContract.g.cs
 ```
 
--  Add entities
-Add Account.cs and TransferRecord.cs files to the directory src/TokenAeIndexer/Entities.
+- Add entities
+
+  Add Account.cs and TransferRecord.cs files to the directory src/TokenAeIndexer/Entities.
 
 
 ```csharp title="Account.cs"
@@ -74,6 +75,7 @@ public class TransferRecord: AeFinderEntity, IAeFinderEntity
 }
 ```
 - Add log event processor
+
   Add the file TokenTransferredProcessor.cs to the directory src/TokenAeIndexer/Processors.
 
 ```csharp title="TokenTransferredProcessor.cs"
@@ -253,7 +255,8 @@ public class Query
 ```
 
 - Register log event processor
-Modify src/TokenAeIndexer/TokenAeIndexerModule.cs to register TokenTransferredProcessor.
+
+  Modify src/TokenAeIndexer/TokenAeIndexerModule.cs to register TokenTransferredProcessor.
 
 ```csharp title="TokenAeIndexerModule.cs"
 using AeFinder.Sdk.Processor;
@@ -279,7 +282,8 @@ public class TokenAeIndexerModule: AbpModule
 ```
 
 - Add entity mapping
-Modify src/TokenAeIndexer/TokenAeIndexerAutoMapperProfile.cs and add entity mapping code.
+  
+  Modify src/TokenAeIndexer/TokenAeIndexerAutoMapperProfile.cs and add entity mapping code.
 
 ```csharp title="TokenAeIndexerAutoMapperProfile.cs"
 using AutoMapper;
