@@ -3,54 +3,54 @@ sidebar_position: 3
 ---
 
 # Developing
-## Creating an AeFinder App
+## Creating an AeIndexer
 
-By using AeFinder to download development templates, you can quickly build an AeFinder App project. For how to download development templates, please read the [Quick Start](quick-start.md)  section.
+By using AeFinder to download development templates, you can quickly build an AeIndexer project. For how to download development templates, please read the [Quick Start](quick-start.md)  section.
 
 ### Project Structure
 
 The project structure created by the development template is as follows:
 ```
 .
-├── MyApp.sln
+├── MyAeIndexer.sln
 ├── src
-│ └── MyApp
+│ └── MyAeIndexer
 │ ├── Contracts
 │ │ ├── MyContract.c.cs
 │ │ └── MyContract.g.cs
 │ ├── Entities
 │ │ └── MyEntity.cs
 │ ├── GraphQL
-│ │ ├── AppSchema.cs
+│ │ ├── AeIndexerSchema.cs
 │ │ ├── GetMyEntityInput.cs
 │ │ ├── MyEntityDto.cs
 │ │ └── Query.cs
-│ ├── MyApp.csproj
-│ ├── MyAppModule.cs
-│ ├── MyAppProfile.cs
+│ ├── MyAeIndexer.csproj
+│ ├── MyAeIndexerModule.cs
+│ ├── MyAeIndexerProfile.cs
 │ └── Processors
 │ └── MyLogEventProcessor.cs
 └── test
-└── MyApp.Tests
+└── MyAeIndexer.Tests
 ├── AssemblyInfo.cs
 ├── Contracts
-├── MyApp.Tests.csproj
-├── MyAppTestBase.cs
-├── MyAppTestModule.cs
+├── MyAeIndexer.Tests.csproj
+├── MyAeIndexerTestBase.cs
+├── MyAeIndexerTestModule.cs
 └── Processors
 └── MyLogEventProcessorTests.cs
 ```
 #### Solution Contents
 
 The solution contains two directories, namely:
-- \`src\`: AeFinder App project
-- \`test\`: AeFinder App unit test project
+- \`src\`: AeIndexer project
+- \`test\`: AeIndexer unit test project
 
-#### AeFinder App Project Structure
+#### AeIndexer Project Structure
 
-In the AeFinder App project, we present the following structure:
+In the AeIndexer project, we present the following structure:
 - **Contracts**: Used to place contract project stiles.
-- **Entities**: Used to place the AeFinder App entity.
+- **Entities**: Used to place the AeIndexer entity.
 - **GraphQL**: Used to place GraphQL schema, query, etc.
 - **Processors**: Used to place specific LogEvent, Transaction, and Block Processor.
 
@@ -58,7 +58,7 @@ The following chapters will provide a detailed introduction to each module.
 
 ### Get the Contract File
 
-In the AeFinder App project, if you need to perform tasks such as processing specified LogEvent or querying data from the chain, you will need to use contract log events and interface definitions. This involves incorporating the appropriate contract file into your project.
+In the AeIndexer project, if you need to perform tasks such as processing specified LogEvent or querying data from the chain, you will need to use contract log events and interface definitions. This involves incorporating the appropriate contract file into your project.
 
 #### Steps to Integrate Contract Files
 
@@ -74,11 +74,11 @@ In the AeFinder App project, if you need to perform tasks such as processing spe
    - ... (include any additional contract files as necessary)
 
 3. **Copy the Contract Files**:
-   Copy the required contract files from the `Protobuf/Generated` folder to the `Contracts` folder of your AeFinder App project.
+   Copy the required contract files from the `Protobuf/Generated` folder to the `Contracts` folder of your AeIndexer project.
 
    Here's an example of the command you might use in a terminal if you are using a Unix-like system:
    ```bash
-   cp path/to/Protobuf/Generated/*.cs path/to/MyApp/src/MyApp/Contracts/
+   cp path/to/Protobuf/Generated/*.cs path/to/MyAeIndexer/src/MyAeIndexer/Contracts/
    ```
 
 
@@ -257,7 +257,7 @@ The `BlockContext` type data holds context information about the block. This mig
 For processors to be effective in an application, they must be registered within the application's module. This is typically done in the `ConfigureServices` method of the module class. Here's how you can register different types of processors in a module using an example of an ABP (ASP.NET Boilerplate vNext) module:
 
 ```csharp
-public class MyAppModule : AbpModule
+public class MyAeIndexerModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -330,22 +330,22 @@ After defining the `Query` class, it is essential to encapsulate the query struc
 
 Define a schema class that inherits from the `AeFinder.Sdk.AppSchema` class and uses the `Query` class as its generic parameter:
 ```csharp
-public class MyAppSchema : AppSchema<Query>
+public class AeIndexerSchema : AppSchema<Query>
 {
-    public MyAppSchema(IServiceProvider serviceProvider) : base(serviceProvider)
+    public AeIndexerSchema(IServiceProvider serviceProvider) : base(serviceProvider)
     {
     }
 }
 ```
 
-#### Configure Services in MyAppModule
+#### Configure Services in MyAeIndexerModule
 
 After you have completed the definition of the `Query` class and the `Schema` class, the next step is to register these components in the application module to ensure they take effect. Here’s how you can do this in an ABP (ASP.NET Boilerplate vNext) module:
 
 ##### Code Implementation
 
 ```csharp
-public class MyAppModule : AbpModule
+public class MyAeIndexerModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -381,7 +381,7 @@ public class ContractDeployedProcessor : LogEventProcessorBase<ContractDeployed>
 In the above example, the `await _blockBlockChainService.ViewContractAsync<T>(string chainId, string contractAddress, string contractMethodName, IMessage parameter)` method can be used to successfully call the contract and return a result of the corresponding type.
 
 ### Logging 
-AeFinder provides a log interface. Developers can record necessary logs in the AeFinder App and view log information according to the log level through the AeFinder App developer background.
+AeFinder provides a log interface. Developers can record necessary logs in the AeIndexer and view log information according to the log level through the AeIndexer developer background.
 
 #### Using the log interface
 In BlockProcessor, TransactionProcessor, and LogEventProcessor, you can directly use the base class Logger to record logs.
@@ -404,29 +404,29 @@ Currently, AeFinder supports the following log levels:
 - Error
 
 #### Log Limitation
-AeFinder has set appropriate limits on log size and call times. For details, please refer to AeFinder App operation limits.
+AeFinder has set appropriate limits on log size and call times. For details, please refer to AeIndexer operation limits.
 
 ### Entity Mapping
 AeFinder integrates the AutoMapper library and supports object mapping using AutoMapper. You can do this by adding your own mapping logic to the Profile.
 
 ```csharp
-public class MyAppProfile : Profile
+public class MyAeIndexerProfile : Profile
 {
-    public MyAppProfile()
+    public MyAeIndexerProfile()
     {
         CreateMap<MyEntity, MyEntityDto>();
     }
 }
 ```
 
-### AeFinder App Limitations 
-To ensure the normal operation of the AeFinder service, necessary restrictions will be imposed on the AeFinder App during deployment and operation.
+### AeIndexer Limitations 
+To ensure the normal operation of the AeFinder service, necessary restrictions will be imposed on the AeIndexer during deployment and operation.
 
-#### AeFinder App Deployment Limitations
-Currently, each AeFinder App is only allowed to define up to 100 entities. If the limit is exceeded, it will not be deployed normally.
+#### AeIndexer Deployment Limitations
+Currently, each AeIndexer is only allowed to define up to 100 entities. If the limit is exceeded, it will not be deployed normally.
 
-#### AeFinder App Operation Limitations
-During the operation of the AeFinder App, the resource usage will be restricted by block as follows:
+#### AeIndexer Operation Limitations
+During the operation of the AeIndexer, the resource usage will be restricted by block as follows:
 
 | Limitation              | Data size        | Requests/Block |
 |-------------------------|------------------|----------------|
@@ -435,7 +435,7 @@ During the operation of the AeFinder App, the resource usage will be restricted 
 | Query data from the chain | -              | 20             |
 
 ## Unit Testing
-AeFinder provides an app testing package: `AeFinder.App.TestBase`, which enables developers to write unit tests before formal deployment to verify the logic of their own app and find potential problems before deployment.
+AeFinder provides an AeIndexer testing package: `AeFinder.App.TestBase`, which enables developers to write unit tests before formal deployment to verify the logic of their own indexer and find potential problems before deployment.
 
 ### Install Dependencies
 To ensure the unit tests run properly, you need to install the following dependencies:
@@ -459,7 +459,7 @@ To ensure the unit tests run properly, you need to install the following depende
 Register your Processor in the TestModule so that it can be used in the test class.
 
 ```csharp
-public class MyAppTestModule : AbpModule
+public class MyAeIndexerTestModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -548,7 +548,7 @@ using Abp.Modules;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 
-public class MyAppTestModule : AbpModule
+public class MyAeIndexerTestModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
