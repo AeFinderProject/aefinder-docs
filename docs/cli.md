@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 # AeFinder CLI
@@ -16,16 +16,16 @@ dotnet tool update -g AeFinder.Cli
 ```
 
 ## Common Options
-- --appid: Required. The appid of the AeFinder App.
-- --key: Required. The deploy key of the AeFinder App.
+- --appid: Required. The appid of the AeIndexer.
+- --key: Required. The deploy key of the AeIndexer.
 - --network: Optional (Default: MainNet). The AeFinder network (MainNet or TestNet).
 
 ## Commands
 Here is a list of all available commands:
 - help: Shows help on the usage of the AeFinder CLI.
-- init: Initiate the AeFinder App development project.
-- deploy: Deploy AeFinder App.
-- update: Update AeFinder App.
+- init: Initiate the AeIndexer development project.
+- deploy: Deploy AeIndexer.
+- update: Update AeIndexer.
 
 ### help
 Show the help information of the AeFinder CLI command.
@@ -40,21 +40,21 @@ aefinder help init
 ```
 
 ### init
-Initiate the AeFinder App development project.
+Initiate the AeIndexer development project.
 Usage:
 ```bash
 aefinder init [option] 
 ```
 Examples:
 ```bash
-aefinder init --name TokenApp --appid appid --key key
+aefinder init --name TokenAeIndexer --appid appid --key key
 ```
 Options
 - --name: Required. The project name.
 - --directory: Optional. The project directory. (Default: Current directory)
 
 ### deploy
-Deploy AeFinder App.
+Deploy AeIndexer.
 Usage:
 ```bash
 aefinder deploy [option] 
@@ -64,11 +64,11 @@ Examples:
 aefinder deploy -manifest manifest.json --code code.dll --appid appid --key key
 ```
 Options
-- --manifest: Required. The manifest file path of your AeFinder App.
-- --code: Required. The code file path of your AeFinder App.
+- --manifest: Required. The manifest file path of your AeIndexer.
+- --code: Required. The code file path of your AeIndexer.
 
 ### update
-Update the code or manifest for the deployed AeFinder App.
+Update the code or manifest for the deployed AeIndexer.
 Usage:
 ```bash
 aefinder update [option] 
@@ -79,7 +79,7 @@ aefinder update --version version -manifest manifest.json --code code.dll --appi
 ```
 Options
 - --version: Required. The version to update.
-- --manifest: Optional. The manifest file path of your AeFinder App.
-- --code: Optional. The code file path of your AeFinder App.
+- --manifest: Optional. The manifest file path of your AeIndexer.
+- --code: Optional. The code file path of your AeIndexer.
 
 Note: --manifest and --code are optional, but at least one of them must be entered.
