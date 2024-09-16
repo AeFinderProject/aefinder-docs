@@ -27,7 +27,7 @@ The project structure created by the development template is as follows:
 │ │ └── Query.cs
 │ ├── MyAeIndexer.csproj
 │ ├── MyAeIndexerModule.cs
-│ ├── MyAeIndexerProfile.cs
+│ ├── MyAeIndexerAutoMapperProfile.cs
 │ └── Processors
 │ └── MyLogEventProcessor.cs
 └── test
@@ -350,7 +350,7 @@ public class MyAeIndexerModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         // Register the schema as a singleton to ensure it is available application-wide
-        context.Services.AddSingleton<ISchema, BlockChainAppSchema>();
+        context.Services.AddSingleton<ISchema, AeIndexerSchema>();
     }
 }
 ```
@@ -410,9 +410,9 @@ AeFinder has set appropriate limits on log size and call times. For details, ple
 AeFinder integrates the AutoMapper library and supports object mapping using AutoMapper. You can do this by adding your own mapping logic to the Profile.
 
 ```csharp
-public class MyAeIndexerProfile : Profile
+public class MyAeIndexerAutoMapperProfile : Profile
 {
-    public MyAeIndexerProfile()
+    public MyAeIndexerAutoMapperProfile()
     {
         CreateMap<MyEntity, MyEntityDto>();
     }
@@ -466,7 +466,7 @@ public class MyAeIndexerTestModule : AbpModule
         // Register entity options
         Configure<AeFinderAppEntityOptions>(options => 
         {
-            options.AddTypes<AppTemplateModule>();
+            options.AddTypes<MyAeIndexerModule>();
         });
         
         // Register your custom Processor as a Singleton
@@ -552,7 +552,7 @@ public class MyAeIndexerTestModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        Configure<AeFinderAppEntityOptions>(options => { options.AddTypes<AppTemplateModule>(); });
+        Configure<AeFinderAppEntityOptions>(options => { options.AddTypes<MyAeIndexerModule>(); });
         
         // Add your Processors.
         context.Services.AddSingleton<MyLogEventProcessor>();
