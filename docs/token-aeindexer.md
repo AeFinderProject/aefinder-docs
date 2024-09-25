@@ -9,6 +9,10 @@ sidebar_position: 5
 
 **Difficulty Level**: Easy
 
+<div class="video-container">
+<iframe src="https://www.youtube.com/embed/9amvWGMUBs0" title="AeFinder Demo: Use AeFinder to Index, Retrieve, and Manage data on aelf AI Blockchain" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
 ## Step 1 - Setting up your development environment
 - Install [dotnet 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - Install IDE: Install your favorite IDE, such as: [VS Code](https://code.visualstudio.com/), [Visual Studio](https://visualstudio.microsoft.com/), [Rider](https://www.jetbrains.com/rider/), etc.
