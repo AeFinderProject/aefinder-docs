@@ -74,7 +74,6 @@ p > img {
   padding-bottom: 56.25%; /* This maintains a 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
-  border: 1px solid #eee;
 }
 
 .video-container iframe {
