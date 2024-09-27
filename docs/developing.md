@@ -95,7 +95,7 @@ Depending on different business needs, a data table is generally required to sto
 Here is an example of how a data entity class might be defined:
 
 ```csharp
-public class ContractRegistration : AeFinderEntity, IAeFinderEntity
+public class MyContractEntity : AeFinderEntity, IAeFinderEntity
 {
     [Keyword]
     public string CodeHash { get; set; }
@@ -109,10 +109,30 @@ public class ContractRegistration : AeFinderEntity, IAeFinderEntity
     public int ContractCategory { get; set; }
 
     public ContractType ContractType { get; set; }
+
+    [Nested(Name = "LogEvents",Enabled = true,IncludeInParent = true,IncludeInRoot = true)]
+    public List<LogEvent> LogEvents{get;set;}
+}
+
+[NestedAttributes("LogEvents")]
+public class LogEvent
+{
+    [Keyword]public string ChainId { get; set; }
+
+    [Keyword]public string BlockHash { get; set; }
+    
+    [Keyword]public string PreviousBlockHash { get; set; }
+    public long BlockHeight { get; set; }
+    
+    public DateTime BlockTime { get; set; }
+    
+    public bool Confirmed{get;set;}
+
+    public Dictionary<string,string> ExtraProperties {get;set;}
 }
 ```
 
-In the above example, `ContractRegistration` is the name of the data entity class. Each data entity class must inherit the `IAeFinderEntity` interface and the `AeFinderEntity` abstract class.
+In the above example, `MyContractEntity` is the name of the data entity class. Each data entity class must inherit the `IAeFinderEntity` interface and the `AeFinderEntity` abstract class.
 
 ##### [Keyword] Attribute 
 This is an index attribute in the NEST library, which acts on the ElasticSearch data index and is used to identify whether a string type field needs to be segmented. The `[Keyword]` tag means no segmentation, otherwise, the default segmentation will affect the filtering results:
@@ -121,6 +141,9 @@ This is an index attribute in the NEST library, which acts on the ElasticSearch 
 
 ##### [Text(Index = false)] Attribute
 For string fields with particularly large content, such as more than 256 characters, they should be marked as `[Text(Index = false)]`, not `[Keyword]`.
+
+##### [Nested] Attribute
+If a nested type field is needed in the index, the corresponding list field must be marked as `[Nested(Name = "")]`. Additionally, the definition of the nested type itself should also be annotated with the `[NestedAttributes("")]` attribute to correspond with the `[Nested]` attribute. This ensures that it is recognized as a nested type in subsequent query operations.
 
 ### Defining Processors
 
@@ -317,6 +340,36 @@ Here, a query interface named `MyEntity` is defined, where `GetMyEntityInput` an
 The input parameters of the sampling method also include two common service classes: `IReadOnlyRepository<MyEntity>` repository and `IObjectMapper` objectMapper. They are marked with `[FromServices]`, indicating that these two parameters are services, not input parameters in the actual interface.
 
 The repository business data storage class can be used to query data from the business data table, using Linq syntax to query.
+
+Here are a few special queries to be aware of:
+##### Terms Query
+
+```csharp
+var queryable = await repository.GetQueryableAsync();
+var predicates = input.Addresses
+    .Select(s => (Expression<Func<MyEntity, bool>>)(info => info.Address == s))
+    .Aggregate((prev, next) => prev.Or(next));
+queryable = queryable.Where(predicates);
+```
+
+##### Nested Query
+
+```csharp
+var queryable = await repository.GetQueryableAsync();
+Expression<Func<MyContractEntity, bool>> mustQuery = m => m.LogEvents.Any(i => i.ChainId == input.ChainId);
+queryable = queryable.Where(mustQuery);
+```
+
+##### Mixed Query of Nested and Terms
+
+```csharp
+var queryable = await repository.GetQueryableAsync();
+var predicates = input.ChainIds
+        .Select(s => (Expression<Func<MyContractEntity, bool>>)(info => info.LogEvents.Any(x => x.ChainId == s)))
+        .Aggregate((prev, next) => prev.Or(next));
+queryable = queryable.Where(predicates);
+```
+
 
 ObjectMapper is an object mapping tool class that can be used to map the entity data of the data table to the output entity class, especially when GraphQL has strict restrictions on the output entity type.
 
