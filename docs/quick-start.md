@@ -12,7 +12,7 @@ sidebar_position: 2
    - Open the website, click on "Dashboard" in the top right corner to enter the AeIndexer management backend.
      ![login](./quick-start/img/login.png)
    - **User name and password**
-     - Please contact the system administrator to obtain the username and password.
+     - Please contact the system administrator to obtain the username and password. Contact Email: contact@aefinder.io.
    - After logging in, click the "Create AeIndexer" button on the top right corner to create an AeIndexer.
      ![MyDashboardCreateApp](./quick-start/img/MyDashboardCreateApp.png)
    - In the panel that appears on the right, enter the name of the AeIndexer.
