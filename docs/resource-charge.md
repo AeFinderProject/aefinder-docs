@@ -35,7 +35,7 @@ If you want to purchase resources, you need to deposit the Billing Contract firs
 Click the top menu Billing on the DashBoard page to enter the billing management page.
 
 ![deposit](./resource-charge/img/deposit.png)
-Then click the "Deposit" button to enter the deposit page.wi
+Then click the "Deposit" button to enter the deposit page.
 
 ![pay](./resource-charge/img/pay.png)
 Enter the deposit amount to recharge.
@@ -141,4 +141,4 @@ When the order status changes to "Payment Confirmed", it means that the payment 
 ## Billing
 At the beginning of each month, the system will generate Settlement Billing and Advance Payment Billing, and automatically deduct the fees. You can see the billing details in Billing Management.
 - Settlement Billing: Settle the resources used in the previous month and generate a bill. The actual usage will be deducted from the advance payment, and the remaining amount will be returned to the user's Billing Contract account.
-- Advance Payment Billing： The resources that continue to be used this month will be pre-deducted and a billing will be generated. The fees will be deducted by locking the user's Billing Contract balance. If the user's balance is insufficient and the fees cannot be deducted normally, the user organization will be frozen after 7 days. At that time, the user's AeIndexer will stop running and the number of API Query will be downgraded to the free package.
+- Advance Payment Billing： The resources that continue to be used this month will be pre-deducted and a billing will be generated. The fees will be deducted by locking the user's Billing Contract balance. If the user's balance is insufficient and the fees cannot be deducted normally, the user account will be frozen after 7 days. At that time, the user's AeIndexer will stop running and the number of API Query will be downgraded to the free package.

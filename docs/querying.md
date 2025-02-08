@@ -3,7 +3,7 @@ sidebar_position: 4
 ---
 
 # Querying
-When AeIndexer is successfully deployed to the AeFinder network, you can query data through the AeIndexer details page. At the same time, you can query data through the unique URL of each AeIndexer in your  application. The query URL format is as follows:
+When AeIndexer is successfully deployed to the AeFinder network, you can query data through the AeIndexer details page. At the same time, you can query data through the unique URL of each AeIndexer in your application. The query URL format is as follows:
 ```
 https://indexer-api.aefinder.io/api/{API_KEY}/graphql/{APP_ID} 
 ```
